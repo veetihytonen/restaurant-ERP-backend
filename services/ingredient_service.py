@@ -1,7 +1,7 @@
-from daos.foodstock_dao import FoodstockDao
+from daos.ingredient_dao import IngredientDao
 
 class IngredientService:
-    def __init__(self, dao: FoodstockDao) -> None:
+    def __init__(self, dao: IngredientDao) -> None:
         self.__dao = dao
 
     def get_all(self) -> list[dict[int, str, str]]:

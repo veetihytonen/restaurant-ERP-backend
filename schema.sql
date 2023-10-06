@@ -6,12 +6,12 @@ CREATE TABLE ingredients (
 
 CREATE TABLE warehouse_replenishments (
     id SERIAL PRIMARY KEY,
-    name TEXT
+    vendor_name TEXT
 );
 
 CREATE TABLE ingredient_replenishments (
     id SERIAL PRIMARY KEY,
-    stock_replenishment_id INT REFERENCES warehouse_replenishments,
+    warehouse_replenishment_id INT REFERENCES warehouse_replenishments,
     ingredient_id INT REFERENCES ingredients,
     amount DECIMAL,
     price_per_unit INT

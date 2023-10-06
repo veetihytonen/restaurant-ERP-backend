@@ -1,7 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 
-class FoodstockDao:
+class IngredientDao:
     """
     DB Interface for doing any business related to ingredients:
         - Adding ingredients
@@ -37,48 +37,19 @@ class FoodstockDao:
         sql = """
         INSERT INTO ingredients (
             name, 
-            storage_category)
+            storage_category
+        )
         VALUES (
             :name,
-            :strg_ctgr) 
+            :strg_ctgr
+        ) 
         RETURNING id, name, storage_category
         """
-        params = {"name":name, "strg_ctgr":storage_category}
+
+        params = {'name':name, 'strg_ctgr':storage_category}
 
         result = self.__db.session.execute(text(sql), params)
         self.__db.session.commit()
 
         return result.fetchone()
     
-    def create_stock_update(self,
-                            replesnishment_id: int | None, 
-                            purchase_id: int | None, 
-                            ingredient_id: int,
-                            amount: float) -> tuple[int | None, int | None, int, float]:
-        """Takes in either replenishment_id or purchase_id depending on event that creates update"""
-
-        sql = """
-            INSERT INTO ingredient_stock_updates (
-                replenishment_id, 
-                purchase_id, 
-                ingredient_id, 
-                amount) 
-            VALUES (
-                :repl_id, 
-                :purch_id, 
-                :ingr_id, 
-                :amount)
-            RETURNING (
-                replenishment_id,
-                purchase_id,
-                ingredient_id,
-                amount)
-        """
-        params = {"repl_id":replesnishment_id, 
-                  "purch_id":purchase_id, 
-                  "ingr_id":ingredient_id, 
-                  "amount":amount}
-        
-        result = self.__db.session.execute(text(sql), params)
-
-        return result.fetchone()

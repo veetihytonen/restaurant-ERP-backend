@@ -1,6 +1,10 @@
 from flask import Flask
-from services.ingredient_service import IngredientService 
-from daos.foodstock_dao import FoodstockDao
+
+from daos.ingredient_dao import IngredientDao
+from daos.stock_dao import StockDao
+
+from services.ingredient_service import IngredientService
+from services.stock_service import StockService
 
 app = Flask(__name__)
 
@@ -8,20 +12,20 @@ from db_init import init_db
 
 import routes.public_router as public
 from routes.ingredient_router import make_ingredient_router
-import routes.stock_update_router as stock_updates
+from routes.stock_router import make_stock_router
 
 init_db()
 
 from db import db
 
-
-
 app.register_blueprint(public.router, url_prefix='/')
 
-foodstock_dao = FoodstockDao(db_connection=db)
-ingredients_service = IngredientService(dao=foodstock_dao)
-ingredient_router = make_ingredient_router(service=ingredients_service)
+ingredient_dao = IngredientDao(db_connection=db)
+ingrendient_service = IngredientService(dao=ingredient_dao)
+ingredient_router = make_ingredient_router(service=ingrendient_service)
 app.register_blueprint(ingredient_router, url_prefix='/ingredients')
 
-app.register_blueprint(stock_updates.router, url_prefix='/stock_updates')
-
+stock_dao = StockDao(db_connection=db)
+stock_service = StockService(dao=stock_dao)
+stock_router = make_stock_router(service=stock_service)
+app.register_blueprint(stock_router, url_prefix='/stock')
