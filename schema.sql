@@ -11,7 +11,7 @@ CREATE TABLE warehouse_replenishments (
 
 CREATE TABLE ingredient_replenishments (
     id SERIAL PRIMARY KEY,
-    warehouse_replenishment_id INT REFERENCES warehouse_replenishments,
+    replenishment_id INT REFERENCES warehouse_replenishments,
     ingredient_id INT REFERENCES ingredients,
     amount DECIMAL,
     price_per_unit INT
@@ -19,7 +19,7 @@ CREATE TABLE ingredient_replenishments (
 
 CREATE TABLE ingredient_stock_updates (
     id SERIAL PRIMARY KEY,
-    replenishment_id INT REFERENCES ingredient_replenishments,
+    replenishment_id INT REFERENCES warehouse_replenishments,
     purchase_id INT,
     ingredient_id INT REFERENCES ingredients,
     amount DECIMAL
