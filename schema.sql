@@ -1,3 +1,10 @@
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username TEXT UNIQUE,
+    password TEXT,
+    role INT
+);
+
 CREATE TABLE ingredients (
     id SERIAL PRIMARY KEY,
     name TEXT UNIQUE,
