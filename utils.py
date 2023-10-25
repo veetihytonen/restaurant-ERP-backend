@@ -1,18 +1,14 @@
-from flask import request, session, abort, redirect, flash, Response
+from flask import request, session, abort
 
 def check_csrf() -> None:
     if session['csrf_token'] != request.form['csrf_token']:
         abort(403)
 
-def check_auth(access_level: int) -> tuple[bool, Response | None]:
+def check_auth(access_level: int) -> tuple[bool, str | None]:
     if 'username' not in session:
-        flash('Et ole kirjautunut sisään', 'error')
+        return False, 'Et ole kirjautunut sisään'
         
-        return False, redirect('/login')
-
     if session['role'] < access_level:
-        flash('Käyttäjälläsi ei ole oikeutta tähän toimintoon', 'error')
-
-        return False, redirect('/')
+        return False, 'Käyttäjälläsi ei ole oikeutta tähän toimintoon'
     
     return True, None

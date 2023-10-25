@@ -18,7 +18,7 @@ class StockService:
     
     def get_ingredient_replenishments(self):
         results = self.__dao.get_ingredient_replenishments()
-        for_json = [
+        formatted = [
             {
             'id': id, 
             'replenishment_id': replenishment_id, 
@@ -29,13 +29,13 @@ class StockService:
             for id, replenishment_id, ingredient_id, amount, price_per_unit in results
         ]
 
-        return for_json
+        return formatted
     
     def get_ingredient_replenishment_by_id(self, replenishment_id: int):
         results = self.__dao.get_ingredient_replenishment_by_replenishment_id(replenishment_id)
         id, replenishment_id, ingredient_id, amount, price_per_unit = results
 
-        for_json = {
+        formatted = {
             'id': id, 
             'replenishment_id': replenishment_id, 
             'ingredient_id': ingredient_id, 
@@ -43,9 +43,9 @@ class StockService:
             'price_per_untit': price_per_unit
         }
 
-        return for_json
+        return formatted
     
-    def get_ingredient_replenishments_by_wh_replenishment_id(self, wh_replenishment_id):
+    def get_ingredient_replenishment_by_wh_replenishment_id(self, wh_replenishment_id):
         results = self.__dao.get_ingredient_replenishments_by_wh_replenishment_id(wh_replenishment_id)
         
         formatted = [
@@ -73,6 +73,6 @@ class StockService:
 
     def get_stock_level_by_id(self, ingredient_id: int):
         i_id, amount = self.__dao.get_stock_level_by_id(ingredient_id)
-        for_json = {'id': i_id, 'amount': amount}
+        formatted = {'id': i_id, 'amount': amount}
 
-        return for_json
+        return formatted
