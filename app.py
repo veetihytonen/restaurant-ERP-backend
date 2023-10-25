@@ -4,10 +4,12 @@ from config import SECRET_KEY
 from daos.user_dao import UserDao
 from daos.ingredient_dao import IngredientDao
 from daos.stock_dao import StockDao
+from daos.product_dao import ProductDao
 
 from services.user_service import UserService
 from services.ingredient_service import IngredientService
 from services.stock_service import StockService
+from services.product_service import ProductService
 
 app = Flask(__name__)
 app.secret_key = SECRET_KEY
@@ -17,6 +19,7 @@ from routes.puclic_router import make_public_router
 from routes.ingredient_router import make_ingredient_router
 from routes.stock_router import make_stock_router
 from routes.replenishment_router import make_replenishment_router
+from routes.product_router import make_product_router
 
 init_db()
 
@@ -41,3 +44,11 @@ replenishment_router = make_replenishment_router(stock_service=stock_service, in
 
 app.register_blueprint(stock_router, url_prefix='/stock')
 app.register_blueprint(replenishment_router, url_prefix='/replenishments')
+
+prodcut_dao = ProductDao(db_connection=db)
+product_service = ProductService(dao=prodcut_dao)
+product_router = make_product_router(service=product_service)
+
+app.register_blueprint(product_router, url_prefix='/products')
+
+

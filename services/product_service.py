@@ -23,3 +23,5 @@ class ProductService:
         formatted = {'id': id, 'name': name}
 
         return formatted
+    
+    

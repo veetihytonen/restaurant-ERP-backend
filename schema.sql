@@ -7,8 +7,8 @@ CREATE TABLE users (
 
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
-    name TEXT UNIQUE,
-)
+    name TEXT UNIQUE
+);
 
 CREATE TABLE ingredients (
     id SERIAL PRIMARY KEY,

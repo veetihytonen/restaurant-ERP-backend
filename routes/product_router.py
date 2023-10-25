@@ -4,7 +4,7 @@ from services.product_service import ProductService
 from http import HTTPMethod, HTTPStatus
 from utils import check_csrf, check_auth
 
-def make_ingredient_router(service: ProductService) -> Blueprint:
+def make_product_router(service: ProductService) -> Blueprint:
     router = Blueprint('product_router', __name__)
 
     @router.route('/', methods=[HTTPMethod.GET])
@@ -33,6 +33,5 @@ def make_ingredient_router(service: ProductService) -> Blueprint:
             return error.args[0], HTTPStatus.CONFLICT
         
         return product, HTTPStatus.CREATED
-
-
-
+    
+    return router

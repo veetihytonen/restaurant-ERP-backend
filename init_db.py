@@ -15,7 +15,8 @@ DROP TABLE IF EXISTS
     warehouse_replenishments,
     ingredient_replenishments,
     ingredient_stock_updates,
-    users
+    users,
+    products
 CASCADE;
 """
 
