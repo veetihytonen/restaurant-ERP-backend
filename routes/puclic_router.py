@@ -1,4 +1,4 @@
-from flask import request, session
+from flask import request
 from flask.blueprints import Blueprint
 from services.user_service import UserService
 from http import HTTPMethod, HTTPStatus

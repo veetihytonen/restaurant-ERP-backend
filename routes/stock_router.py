@@ -1,8 +1,8 @@
-from flask import request, session
+from flask import request
 from flask.blueprints import Blueprint
 from services.stock_service import StockService
 from http import HTTPMethod, HTTPStatus
-from utils import check_csrf, check_auth
+from utils import check_auth
 
 def make_stock_router(service: StockService):
     router = Blueprint('stock_update_router', __name__)
@@ -26,4 +26,3 @@ def make_stock_router(service: StockService):
         results = service.get_stock_level_by_id(ingredient_id)
 
         return results, HTTPStatus.OK
-    

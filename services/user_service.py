@@ -1,4 +1,4 @@
-from flask import abort, request, session
+from flask import session
 from daos.user_dao import UserDao
 from secrets import token_hex
 
@@ -41,4 +41,6 @@ class UserService:
 
         user_id, username, role  = self.__dao.create_user(username, password1, role)
 
-        return True
+        user = {'id': user_id, 'username': username, 'role': role}
+
+        return user
