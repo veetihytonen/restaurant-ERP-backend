@@ -16,7 +16,9 @@ DROP TABLE IF EXISTS
     ingredient_replenishments,
     ingredient_stock_updates,
     users,
-    products
+    products,
+    product_versions,
+    product_ingredient_mapping
 CASCADE;
 """
 

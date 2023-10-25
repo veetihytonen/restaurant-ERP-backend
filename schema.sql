@@ -5,11 +5,6 @@ CREATE TABLE users (
     role INT
 );
 
-CREATE TABLE products (
-    id SERIAL PRIMARY KEY,
-    name TEXT UNIQUE
-);
-
 CREATE TABLE ingredients (
     id SERIAL PRIMARY KEY,
     name TEXT UNIQUE,
@@ -36,3 +31,21 @@ CREATE TABLE ingredient_stock_updates (
     ingredient_id INT REFERENCES ingredients,
     amount DECIMAL
 );
+
+CREATE TABLE products (
+    id SERIAL PRIMARY KEY,
+    name TEXT UNIQUE
+);
+
+CREATE TABLE product_versions (
+    id SERIAL PRIMARY KEY,
+    sale_price DECIMAL,
+    product_id INT REFERENCES products
+);
+
+CREATE TABLE product_ingredient_mapping (
+    product_version_id INT REFERENCES product_versions,
+    ingredient_id INT REFERENCES ingredients,
+    amount DECIMAL
+);
+

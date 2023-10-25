@@ -44,6 +44,9 @@ class ProductDao:
         
         return result.fetchone()
     
+    def create_product_version(self, product_id: int, ingredients_and_amounts: dict):
+        pass
+    
 
 
 
