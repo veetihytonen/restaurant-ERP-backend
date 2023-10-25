@@ -18,7 +18,9 @@ DROP TABLE IF EXISTS
     users,
     products,
     product_versions,
-    product_ingredient_mapping
+    product_ingredient_mapping,
+    purchases,
+    product_sales
 CASCADE;
 """
 

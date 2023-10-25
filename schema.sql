@@ -45,9 +45,18 @@ CREATE TABLE product_versions (
 );
 
 CREATE TABLE product_ingredient_mapping (
-    id serial PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     product_version_id INT REFERENCES product_versions,
     ingredient_id INT REFERENCES ingredients,
     amount FLOAT
 );
 
+CREATE TABLE purchases (
+    id SERIAL PRIMARY KEY
+);
+
+CREATE TABLE product_sales (
+    id SERIAL PRIMARY KEY,
+    purchase_id INT REFERENCES purchases,
+    product_version_id INT REFERENCES product_versions
+);
