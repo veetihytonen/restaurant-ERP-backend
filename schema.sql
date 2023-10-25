@@ -20,7 +20,7 @@ CREATE TABLE ingredient_replenishments (
     id SERIAL PRIMARY KEY,
     replenishment_id INT REFERENCES warehouse_replenishments,
     ingredient_id INT REFERENCES ingredients,
-    amount DECIMAL,
+    amount FLOAT,
     price_per_unit INT
 );
 
@@ -29,7 +29,7 @@ CREATE TABLE ingredient_stock_updates (
     replenishment_id INT REFERENCES warehouse_replenishments,
     purchase_id INT,
     ingredient_id INT REFERENCES ingredients,
-    amount DECIMAL
+    amount FLOAT
 );
 
 CREATE TABLE products (
@@ -39,13 +39,15 @@ CREATE TABLE products (
 
 CREATE TABLE product_versions (
     id SERIAL PRIMARY KEY,
-    sale_price DECIMAL,
+    version_number INT,
+    sale_price INT,
     product_id INT REFERENCES products
 );
 
 CREATE TABLE product_ingredient_mapping (
+    id serial PRIMARY KEY,
     product_version_id INT REFERENCES product_versions,
     ingredient_id INT REFERENCES ingredients,
-    amount DECIMAL
+    amount FLOAT
 );
 
