@@ -23,18 +23,19 @@ ingredients = [('lettuce', 'cold'), ('tomato_diced', 'cold'), ('tortilla', 'dry'
 
 ingr_sql = text('INSERT INTO ingredients (name, storage_category) VALUES (:name, :strg_ctgr)')
 
-with engine.connect() as conn:
-    conn.execute(text(drop_tables))
-    conn.commit()
+def init_db():
+    with engine.connect() as conn:
+        conn.execute(text(drop_tables))
+        conn.commit()
 
-    with open("./schema.sql") as schema:
-        queries = schema.read()
+        with open("./schema.sql") as schema:
+            queries = schema.read()
 
-    conn.execute(text(queries))
-    conn.commit()
+        conn.execute(text(queries))
+        conn.commit()
 
-    for ingr in ingredients:
-            name = ingr[0]
-            strg_ctgr = ingr[1]
-            conn.execute(ingr_sql, {'name':name, 'strg_ctgr':strg_ctgr})
-    conn.commit()
+        for ingr in ingredients:
+                name = ingr[0]
+                strg_ctgr = ingr[1]
+                conn.execute(ingr_sql, {'name':name, 'strg_ctgr':strg_ctgr})
+        conn.commit()

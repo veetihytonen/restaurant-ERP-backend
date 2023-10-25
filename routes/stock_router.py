@@ -26,3 +26,5 @@ def make_stock_router(service: StockService):
         results = service.get_stock_level_by_id(ingredient_id)
 
         return results, HTTPStatus.OK
+    
+    return router
