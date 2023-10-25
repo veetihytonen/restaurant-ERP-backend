@@ -13,7 +13,7 @@ app = Flask(__name__)
 app.secret_key = SECRET_KEY
 from db_init import init_db
 
-from routes.main_router import make_main_router
+from routes.puclic_router import make_public_router
 from routes.ingredient_router import make_ingredient_router
 from routes.stock_router import make_stock_router
 from routes.replenishment_router import make_replenishment_router
@@ -24,9 +24,9 @@ from db import db
 
 user_dao = UserDao(db_connection=db)
 user_service = UserService(dao=user_dao)
-main_router = make_main_router(service=user_service)
+public_router = make_public_router(service=user_service)
 
-app.register_blueprint(main_router, url_prefix='/')
+app.register_blueprint(public_router, url_prefix='/')
 
 ingredient_dao = IngredientDao(db_connection=db)
 ingrendient_service = IngredientService(dao=ingredient_dao)

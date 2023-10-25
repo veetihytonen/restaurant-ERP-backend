@@ -17,7 +17,13 @@ class UserService:
         session['role'] = user['role']
         session['csrf_token'] = token_hex(16)
 
-        return True
+        return user
+
+    def logout(self):
+        del session['id']
+        del session['username']
+        del session['role']
+        del session['csrf_token']
 
     def register(self, username: str, password1: str, password2: str, role: int):
         # validation failure returns dict: {'username': "error here", 'passwords': "error here"}

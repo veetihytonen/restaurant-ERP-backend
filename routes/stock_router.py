@@ -1,4 +1,4 @@
-from flask import request, session, render_template, redirect, flash
+from flask import request, session
 from flask.blueprints import Blueprint
 from services.stock_service import StockService
 from http import HTTPMethod, HTTPStatus

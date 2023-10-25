@@ -34,7 +34,7 @@ def make_replenishment_router(stock_service: StockService, ingredient_service: I
 
     @router.route('/<wh_replenishment_id>', methods=[HTTPMethod.GET])
     def get_wh_replenishment_by_id(wh_replenishment_id: int):
-        auth = check_auth(access_level=0)
+        auth = check_auth(access_level=1)
         if not auth[0]:
             return auth[1], HTTPStatus.UNAUTHORIZED
         
