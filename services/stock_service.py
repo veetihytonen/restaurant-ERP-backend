@@ -20,11 +20,11 @@ class StockService:
         results = self.__dao.get_ingredient_replenishments()
         formatted = [
             {
-            'id': id, 
-            'replenishment_id': replenishment_id, 
-            'ingredient_id': ingredient_id, 
-            'amount': amount, 
-            'price_per_untit': price_per_unit
+                'id': id, 
+                'replenishment_id': replenishment_id, 
+                'ingredient_id': ingredient_id, 
+                'amount': amount, 
+                'price_per_untit': price_per_unit
             } 
             for id, replenishment_id, ingredient_id, amount, price_per_unit in results
         ]

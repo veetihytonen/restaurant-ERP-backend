@@ -37,7 +37,8 @@ class IngredientDao:
             :name,
             :strg_ctgr
         ) 
-        RETURNING id, name, storage_category
+        RETURNING 
+            id, name, storage_category
         """
 
         params = {'name':name, 'strg_ctgr':storage_category}

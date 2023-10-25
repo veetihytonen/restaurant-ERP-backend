@@ -30,7 +30,7 @@ def make_ingredient_router(service: IngredientService) -> Blueprint:
         try:
             result = service.create(name=name, category=category)
         except ValueError as ve:
-            return ve.args[0], 409
+            return ve.args[0], HTTPStatus.CONFLICT
 
         return result, HTTPStatus.CREATED
         

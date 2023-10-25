@@ -5,6 +5,11 @@ CREATE TABLE users (
     role INT
 );
 
+CREATE TABLE products (
+    id SERIAL PRIMARY KEY,
+    name TEXT UNIQUE,
+)
+
 CREATE TABLE ingredients (
     id SERIAL PRIMARY KEY,
     name TEXT UNIQUE,
