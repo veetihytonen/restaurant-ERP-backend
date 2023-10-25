@@ -25,3 +25,36 @@ There are three user roles in the application with increasing levels of access (
 * Managers can add or remove recipes from the list of recipes
 * Managers can see basic analytics from the reporting tool, such as current top selling prodcut
 * Admins are able to create, update and remove users
+
+### Current state of the app
+
+### Installation and setup
+1. Clone the git repository
+``` 
+git clone git@github.com:veetihytonen/restaurant-ERP-backend.git
+```
+2. Create and activate virtual environment
+``` 
+python3 -m venv venv
+```
+``` 
+source venv/bin/activate
+```
+3. Install dependencies
+```
+pip install -r requirements.txt
+```
+4. Create .env file and add these rows
+```
+DATABASE_URI=<database-local-address>
+SECRET_KEY=<your-secret-key>
+```
+5. Start your local postgres database
+6. Initialise database by running init script
+```
+python3 init_db.py
+```
+7. Run the app with command
+```
+flask run
+```
