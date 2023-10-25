@@ -99,4 +99,3 @@ class UserDao:
             raise ValueError('Käyttäjä on jo olemassa')
 
         return results.fetchone()
-s
