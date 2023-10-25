@@ -1,14 +1,9 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 
-class IngredientDao:
-    """
-    DB Interface for doing any business related to ingredients:
-        - Adding ingredients
-        - Stock updates
-        - Replenishments (orders)
-    """
+from sqlalchemy.exc import IntegrityError
 
+class IngredientDao:
     def __init__(self, db_connection: SQLAlchemy) -> None:
         self.__db = db_connection
 
@@ -33,7 +28,6 @@ class IngredientDao:
         return result.fetchall()
 
     def create_ingredient(self, name: str, storage_category: str) -> tuple[int, str, str]:
-        """Returns created row"""
         sql = """
         INSERT INTO ingredients (
             name, 
@@ -47,9 +41,11 @@ class IngredientDao:
         """
 
         params = {'name':name, 'strg_ctgr':storage_category}
-
-        result = self.__db.session.execute(text(sql), params)
-        self.__db.session.commit()
+        
+        try:
+            result = self.__db.session.execute(text(sql), params)
+            self.__db.session.commit()
+        except IntegrityError:
+            raise ValueError('Raaka-aine on jo olemassa')
 
         return result.fetchone()
-    

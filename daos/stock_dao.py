@@ -7,10 +7,15 @@ class StockDao:
 
     def get_all_stock_levels(self):
         sql = """
-        SELECT ingredient_id, SUM (amount)
-        FROM ingredient_stock_updates
-        GROUP BY ingredient_id
-        ORDER BY ingredient_id ASC
+        SELECT ingredients.id, ingredients.name, SUM (ingredient_stock_updates.amount)
+        FROM 
+            ingredients
+        LEFT JOIN 
+            ingredient_stock_updates
+        ON 
+            ingredients.id = ingredient_stock_updates.ingredient_id
+        GROUP BY ingredients.id
+        ORDER BY ingredients.id ASC
         """
 
         results = self.__db.session.execute(text(sql))
@@ -76,14 +81,25 @@ class StockDao:
     
     def get_ingredient_replenishments_by_wh_replenishment_id(self, wh_replenishment_id: int):
         sql = """
-        SELECT 
-            id,
-            replenishment_id, 
-            ingredient_id,
-            amount,
-            price_per_unit
-        FROM ingredient_replenishments
-        WHERE replenishment_id = :id
+        SELECT
+            ingr_repl.id,
+            wh_repl.vendor_name,
+            ingr.name,
+            ingr_repl.replenishment_id, 
+            ingr_repl.ingredient_id,
+            ingr_repl.amount,
+            ingr_repl.price_per_unit
+        FROM
+            warehouse_replenishments AS wh_repl
+        INNER JOIN
+            ingredient_replenishments AS ingr_repl
+        ON 
+            wh_repl.id = ingr_repl.replenishment_id
+        INNER JOIN
+            ingredients as ingr
+        ON ingr_repl.ingredient_id = ingr.id
+        WHERE 
+            wh_repl.id = :id
         """
 
         params = {'id': wh_replenishment_id}
@@ -102,7 +118,9 @@ class StockDao:
         VALUES (
             :name
         )
-        RETURNING id, vendor_name
+        RETURNING 
+            id, 
+            vendor_name
         """
 
         params = {'name': vendor_name}
