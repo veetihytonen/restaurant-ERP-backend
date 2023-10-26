@@ -5,11 +5,13 @@ from daos.user_dao import UserDao
 from daos.ingredient_dao import IngredientDao
 from daos.stock_dao import StockDao
 from daos.product_dao import ProductDao
+from daos.purchase_dao import PurchaseDao
 
 from services.user_service import UserService
 from services.ingredient_service import IngredientService
 from services.stock_service import StockService
 from services.product_service import ProductService
+from services.purchase_service import PurchaseService
 
 app = Flask(__name__)
 app.secret_key = SECRET_KEY
@@ -20,6 +22,7 @@ from routes.ingredient_router import make_ingredient_router
 from routes.stock_router import make_stock_router
 from routes.replenishment_router import make_replenishment_router
 from routes.product_router import make_product_router
+from routes.purchase_router import make_purchase_router
 
 init_db()
 
@@ -51,4 +54,8 @@ product_router = make_product_router(service=product_service)
 
 app.register_blueprint(product_router, url_prefix='/products')
 
+purchase_dao = PurchaseDao(db_connection=db)
+purchase_service = PurchaseService(dao=purchase_dao)
+purchase_router = make_purchase_router(service=purchase_service)
 
+app.register_blueprint(purchase_router, url_prefix='/purchases')

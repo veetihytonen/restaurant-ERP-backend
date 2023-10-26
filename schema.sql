@@ -52,11 +52,13 @@ CREATE TABLE product_ingredient_mapping (
 );
 
 CREATE TABLE purchases (
-    id SERIAL PRIMARY KEY
+    id SERIAL PRIMARY KEY,
+    customer_id INT
 );
 
 CREATE TABLE product_sales (
     id SERIAL PRIMARY KEY,
     purchase_id INT REFERENCES purchases,
-    product_version_id INT REFERENCES product_versions
+    product_version_id INT REFERENCES product_versions,
+    amount INT
 );
