@@ -24,10 +24,6 @@ DROP TABLE IF EXISTS
 CASCADE;
 """
 
-ingredients = [('lettuce', 'cold'), ('tomato_diced', 'cold'), ('tortilla', 'dry')]
-
-ingr_sql = text('INSERT INTO ingredients (name, storage_category) VALUES (:name, :strg_ctgr)')
-
 def init_db():
     with engine.connect() as conn:
         conn.execute(text(drop_tables))
@@ -37,10 +33,4 @@ def init_db():
             queries = schema.read()
 
         conn.execute(text(queries))
-        conn.commit()
-
-        for ingr in ingredients:
-                name = ingr[0]
-                strg_ctgr = ingr[1]
-                conn.execute(ingr_sql, {'name':name, 'strg_ctgr':strg_ctgr})
         conn.commit()

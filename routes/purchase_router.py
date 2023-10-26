@@ -27,7 +27,6 @@ def make_purchase_router(service: PurchaseService) -> Blueprint:
 
         return sales, HTTPStatus.OK
 
-
     @router.route('/', methods=[HTTPMethod.POST])
     def create_purchase():
         auth = check_auth(access_level=0)

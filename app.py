@@ -15,7 +15,6 @@ from services.purchase_service import PurchaseService
 
 app = Flask(__name__)
 app.secret_key = SECRET_KEY
-from init_db import init_db
 
 from routes.puclic_router import make_public_router
 from routes.ingredient_router import make_ingredient_router
@@ -24,7 +23,6 @@ from routes.replenishment_router import make_replenishment_router
 from routes.product_router import make_product_router
 from routes.purchase_router import make_purchase_router
 
-init_db()
 
 from db import db
 
