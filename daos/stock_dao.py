@@ -130,7 +130,7 @@ class StockDao:
         sql = """
         INSERT INTO ingredient_stock_updates (
             replenishment_id, 
-            purchase_id, 
+            product_sale_id, 
             ingredient_id, 
             amount
         ) 

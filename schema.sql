@@ -24,14 +24,6 @@ CREATE TABLE ingredient_replenishments (
     price_per_unit INT
 );
 
-CREATE TABLE ingredient_stock_updates (
-    id SERIAL PRIMARY KEY,
-    replenishment_id INT REFERENCES warehouse_replenishments,
-    purchase_id INT,
-    ingredient_id INT REFERENCES ingredients,
-    amount FLOAT
-);
-
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
     name TEXT UNIQUE
@@ -52,8 +44,7 @@ CREATE TABLE product_ingredient_mapping (
 );
 
 CREATE TABLE purchases (
-    id SERIAL PRIMARY KEY,
-    customer_id INT
+    id SERIAL PRIMARY KEY
 );
 
 CREATE TABLE product_sales (
@@ -61,4 +52,12 @@ CREATE TABLE product_sales (
     purchase_id INT REFERENCES purchases,
     product_version_id INT REFERENCES product_versions,
     amount INT
+);
+
+CREATE TABLE ingredient_stock_updates (
+    id SERIAL PRIMARY KEY,
+    replenishment_id INT REFERENCES warehouse_replenishments,
+    product_sale_id INT REFERENCES product_sales,
+    ingredient_id INT REFERENCES ingredients,
+    amount FLOAT
 );
