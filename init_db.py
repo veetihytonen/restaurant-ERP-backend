@@ -24,13 +24,12 @@ DROP TABLE IF EXISTS
 CASCADE;
 """
 
-def init_db():
-    with engine.connect() as conn:
-        conn.execute(text(drop_tables))
-        conn.commit()
+with engine.connect() as conn:
+    conn.execute(text(drop_tables))
+    conn.commit()
 
-        with open("./schema.sql") as schema:
-            queries = schema.read()
+    with open("./schema.sql") as schema:
+        queries = schema.read()
 
-        conn.execute(text(queries))
-        conn.commit()
+    conn.execute(text(queries))
+    conn.commit()
