@@ -32,15 +32,15 @@ public_router = make_public_router(service=user_service)
 app.register_blueprint(public_router, url_prefix='/')
 
 ingredient_dao = IngredientDao(db_connection=db)
-ingrendient_service = IngredientService(dao=ingredient_dao)
-ingredient_router = make_ingredient_router(service=ingrendient_service)
+ingredient_service = IngredientService(dao=ingredient_dao)
+ingredient_router = make_ingredient_router(service=ingredient_service)
 
 app.register_blueprint(ingredient_router, url_prefix='/ingredients')
 
 stock_dao = StockDao(db_connection=db)
 stock_service = StockService(dao=stock_dao)
 stock_router = make_stock_router(service=stock_service)
-replenishment_router = make_replenishment_router(stock_service=stock_service, ingredient_service=ingrendient_service)
+replenishment_router = make_replenishment_router(stock_service=stock_service, ingredient_service=ingredient_service)
 
 app.register_blueprint(stock_router, url_prefix='/stock')
 app.register_blueprint(replenishment_router, url_prefix='/replenishments')
