@@ -56,5 +56,5 @@ python3 init_db.py
 ```
 7. Run the app with command
 ```
-flask run
+flask --app src/app.py run
 ```

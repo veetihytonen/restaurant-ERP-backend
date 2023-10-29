@@ -28,7 +28,7 @@ with engine.connect() as conn:
     conn.execute(text(drop_tables))
     conn.commit()
 
-    with open("./schema.sql") as schema:
+    with open("./src/schema.sql") as schema:
         queries = schema.read()
 
     conn.execute(text(queries))
